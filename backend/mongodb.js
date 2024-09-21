@@ -3,7 +3,6 @@ require('dotenv').config({ path: '../.env' });
 
 // the mongodb server URL
 const dbURL = process.env.MONGODB_URI;
-console.log(dbURL);
 
 // import the mongodb driver
 const { MongoClient } = require('mongodb');
@@ -38,7 +37,7 @@ const getDB = async () => {
   if (!MongoConnection) {
     await connect();
   }
-  return MongoConnection.db();
+  return MongoConnection;
 };
 
 /**

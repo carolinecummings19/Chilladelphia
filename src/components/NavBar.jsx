@@ -32,6 +32,10 @@ const NavBar = withAuthInfo((props) => {
     navigate("/involvement");
   };
 
+  const forum = () => {
+    navigate("/forum");
+  };
+
   const about = () => {
     navigate("/about");
   };
@@ -54,6 +58,9 @@ return (
                     </div>
                     <div onClick={involvement} className="px-4 cursor-pointer">
                         Get Involved
+                    </div>
+                    <div onClick={forum} className="px-4 cursor-pointer">
+                        Connect with Others
                     </div>
                     <div onClick={about} className="px-4 cursor-pointer">
                         About Us
