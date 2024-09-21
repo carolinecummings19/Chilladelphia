@@ -6,6 +6,7 @@ import Contact from './pages/Contact';
 import Map from './pages/Map.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Involvement from './pages/Involvement.jsx';
+import ForumPage from './pages/ForumPage.jsx';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				<Route path='/' element={<Home />} />
 				<Route path='/map' element={<Map />} />
 				<Route path='/involvement' element={<Involvement />} />
+				<Route path='/forum' element={<ForumPage />} />
 				<Route path='/about' element={<AboutUs />} />
 				<Route path='/privacy-policy' element={<PrivacyPolicy />} />
 				<Route path='/terms' element={<Terms />} />

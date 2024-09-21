@@ -10,7 +10,7 @@ export default function Involvement() {
     const rootURL = config.serverRootURL;
 
     return (
-        <div>
+        <div className="flex flex-col">
             <NavBar></NavBar>
             <div className="w-screen h-full bg-[--light-taupe-grey] overflow flex justify-center">
                 <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-auto h-full font-Lato my-4">
