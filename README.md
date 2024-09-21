@@ -1,11 +1,11 @@
 # React + Vite
 
-Commands I have run:
+Commands:
 
-`npm install`
-`npm i axios`
-`npm i -D tailwindcss postcss autoprefixer`
-`npm i react-router-dom`
-`npm i lucide-react`
-`npm i @radix-ui/themes`
-`npm i @propelauth/react`
+`npm install` when first cloning repo
+
+`npm run dev`
+
+Open and new terminal while the first terminal is running and do:
+`cd backend`
+`npm start`
