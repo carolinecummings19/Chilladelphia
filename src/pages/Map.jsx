@@ -17,6 +17,7 @@ export default function Map() {
     const rootURL = config.serverRootURL;
 
     const [address, setAddress] = useState("");
+    const [location, setLocation] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [imageURL, setImageURL] = useState("https://neverastray.com/generated/assets/img/product/city-maps/30x20-philadelphia-(40.0049,-75.1180,11.02)-2022-07-12-1000-a799907a2.webp");
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
@@ -41,28 +42,39 @@ export default function Map() {
         });
     };
 
-    const handleAddressSelect = (selectedAddress) => {
+    const handleAddressSelect = (selectedAddress, location) => {
         setAddress(selectedAddress);
+        setLocation(location);
         setSuggestions([]);
     };
 
     const handleAddressSubmit = () => {
-        // Use Radar's geocoding API to get the coordinates of the inputted address
-        Radar.forwardGeocode({ query: address }, (err, result) => {
-            if (err) {
-                console.error("Geocoding error:", err);
-                return;
-            }
-            if (result && result.addresses && result.addresses.length > 0) {
-                const { latitude, longitude } = result.addresses[0].location;
-                setCoordinates({ lat: latitude, lng: longitude });
-                console.log("Coordinates:", latitude, longitude);
-                // Optionally, update the imageURL based on the fetched coordinates
-                // setImageURL(fetchedImageURL);
-            } else {
-                console.log("No addresses found for the inputted address.");
-            }
-        });
+        // // Use Radar's geocoding API to get the coordinates of the inputted address
+        // Radar.forwardGeocode({ query: address }, (err, result) => {
+        //     if (err) {
+        //         console.error("Geocoding error:", err);
+        //         return;
+        //     }
+        //     if (result && result.addresses && result.addresses.length > 0) {
+        //         console.log("here");
+        //         const { latitude, longitude } = result.addresses[0].location;
+        //         setCoordinates({ lat: latitude, long: longitude });
+        //         console.log("Coordinates:", latitude, longitude);
+        //         // Optionally, update the imageURL based on the fetched coordinates
+        //         // setImageURL(fetchedImageURL);
+        //     } else {
+        //         console.log("No addresses found for the inputted address.");
+        //     }
+        // });
+        console.log("Location:", location);
+        if (address && location) {
+            setCoordinates({ lat: location.latitude, long: location.longitude });
+            console.log("Coordinates:", location.latitude, location.longitude);
+            // Optionally, update the imageURL based on the fetched coordinates
+            // setImageURL(fetchedImageURL);
+        } else {
+            console.log("No addresses found for the inputted address.");
+        }
     };
 
     return (
@@ -92,7 +104,7 @@ export default function Map() {
                                     {suggestions.slice(0, 10).map((suggestion, index) => (
                                         <li
                                             key={index}
-                                            onClick={() => handleAddressSelect(suggestion.formattedAddress)}
+                                            onClick={() => handleAddressSelect(suggestion.formattedAddress, suggestion)}
                                             className="p-2 cursor-pointer hover:bg-gray-200"
                                         >
                                             {suggestion.formattedAddress}

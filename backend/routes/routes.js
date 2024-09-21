@@ -13,13 +13,13 @@ const db = getDB();
 // Setup the routes
 const getImage = async (req) => {
     const { lat, long } = req;
-  
+    console.log('lat:', lat, 'long:', long);
     try {
-      const result = await db.collection('Images').findOne({
-        tl_lat1: { $gte: lat },    // Top-left latitude must be greater than or equal to req.lat
-        tl_lat2: { $lte: lat },    // Bottom-right latitude must be less than or equal to req.lat
-        tl_long1: { $gte: long },  // Top-left longitude must be greater than or equal to req.long
-        tl_long2: { $lte: long }   // Bottom-right longitude must be less than or equal to req.long
+      const result = await db.collection('Images_UCD').findOne({
+        br_lat: { $gte: lat },    // Top-left latitude must be greater than or equal to req.lat
+        tl_lat: { $lte: lat },    // Bottom-right latitude must be less than or equal to req.lat
+        tl_long: { $gte: long },  // Top-left longitude must be greater than or equal to req.long
+        br_long: { $lte: long }   // Bottom-right longitude must be less than or equal to req.long
       });
   
       if (!result) {
