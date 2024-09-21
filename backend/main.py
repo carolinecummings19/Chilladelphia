@@ -1,16 +1,10 @@
 # main.py
-import numpy as np
 from connect import connect_to_mongodb, save_analysis_to_mongodb, retrieve_tile_from_mongodb
-import numpy as np
-import base64
-import detectree as dtr
-import matplotlib.pyplot as plt
-from connect import store_image_in_mongodb  # Your MongoDB interaction module
-from PIL import Image
-from imageanalysis import analyze_image
+
+# from imageanalysis import analyze_image
 
 # Assume this is the function that retrieves the image as a NumPy array (in another file)
-from image_retrieval import get_image_array  
+from tiles_downloading import generate_tiles, image_helper, image_loop 
 
 # MongoDB setup
 uri = "mongodb+srv://jfrem:jacc@cluster0.nelg2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
@@ -26,14 +20,21 @@ def main():
 
     ## MAIN LOOP LOGIC WILL GO HERE !! 
     # Step 1: Get image as a NumPy array (from separate file)
-    image_array, tile_id = get_image_array()
-    
+    bounds = {"top_left": ("39.95332772096469, -75.19819431862636"),
+              "bottom_right": ("39.950001048462305, -75.19574148463124")}
+    tiles = generate_tiles(bounds, tile_size=0.002)
+    tile = tiles[0]
+    tl, br = tile
+    image_array, tile_id = image_helper(tl,br,19)
+
+
     # Step 2: Perform analysis (detectree)
-    analyzed_image, greenspace_percentage = analyze_image(image_array)
+    # analyzed_image, greenspace_percentage = analyze_image(image_array)
 
 
     # Step 3: Store results in MongoDB
-    save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection)
+    save_analysis_to_mongodb(image_array, image_array, 20, 30, collection)
+    print("reached")
 
 if __name__ == "__main__":
     main()
