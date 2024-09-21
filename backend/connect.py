@@ -1,36 +1,34 @@
 from pymongo import MongoClient
 from PIL import Image
-from io import BytesIO
+import io
 import base64
 from dotenv import load_dotenv
 import numpy as np
 
-# Function to connect to MongoDB
+# Function to connect to MongoDB/initialize collection
 def connect_to_mongodb(uri, db_name, collection_name):
     client = MongoClient(uri)
     db = client[db_name]
     collection = db[collection_name]
     return collection
 
-# ctore in mongo
-def store_tile_in_mongodb(tile_id, tile_array, collection):
-    # Convert NumPy array to an image (e.g., PNG)
-    image = Image.fromarray(np.uint8(tile_array))
 
-    # Create a BytesIO buffer to save the image in-memory
-    buffered = io.BytesIO()
-    image.save(buffered, format="PNG")
 
-    # Convert image to base64 encoding to store in MongoDB
-    encoded_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
+# Function to store image in MongoDB
+def store_images_in_mongodb(original_image, analyzed_image, greenspace_percentage, tile_id, collection):
+    # Encode both original and analyzed images to base64
+    original_encoded = base64.b64encode(original_image).decode('utf-8')
+    analyzed_encoded = base64.b64encode(analyzed_image).decode('utf-8')
 
-    # Insert the tile metadata and image into MongoDB
-    tile_document = {
+    # Store all details in MongoDB
+    document = {
         'tile_id': tile_id,
-        'image': encoded_image  # Store the image as base64 encoded string
+        'original_image': original_encoded,
+        'analyzed_image': analyzed_encoded,
+        'greenspace_percentage': greenspace_percentage
     }
-    collection.insert_one(tile_document)
-    print(f"Tile {tile_id} stored successfully.")
+    collection.insert_one(document)
+    print(f"Images and analysis for {tile_id} stored successfully.")
 
 # Function to retrieve a NumPy array (image) from MongoDB
 def retrieve_tile_from_mongodb(tile_id, collection):
