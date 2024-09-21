@@ -1,13 +1,13 @@
 # main.py
 from connect import connect_to_mongodb, save_analysis_to_mongodb
-from imageanalysis import analyze_image
+# from imageanalysis import analyze_image
 
 # Assume this is the function that retrieves the image as a NumPy array (in another file)
 from tiles_downloading import generate_tiles, image_helper, image_loop 
 
 # MongoDB setup
 uri = "mongodb+srv://jfrem:jacc@cluster0.nelg2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-db_name = "Chilladelphia"
+db_name = "chilladelphia"
 collection_name = "Images"
 
 
@@ -15,6 +15,23 @@ collection_name = "Images"
 def main():
     # Assuming you already set up the MongoDB collection and connection in store_images.py
     #lol need to actually implement this
+    # try:
+    #     collection = connect_to_mongodb(uri, db_name, collection_name)
+    #     print("Connected to MongoDB successfully!")
+    # except Exception as e:
+    #     print(f"Error connecting to MongoDB: {e}")
+    # document = {
+    #     "original_image": 1,
+    #     "analyzed_image": 2,
+    #     "greenspace_percentage": 3
+    # }
+    # try:
+    #     print("reached here")
+    #     collection.insert_one(document)
+    #     print("Document inserted successfully!")
+    # except Exception as e:
+    #     print(f"Error inserting document: {e}")
+
     collection = connect_to_mongodb(uri, db_name, collection_name)
 
     ## MAIN LOOP LOGIC WILL GO HERE !! 
@@ -28,11 +45,11 @@ def main():
 
     print("Image found!")
     # Step 2: Perform analysis (detectree)
-    analyzed_image, greenspace_percentage = analyze_image(image_array)
+    # analyzed_image, greenspace_percentage = analyze_image(image_array)
 
 
     # Step 3: Store results in MongoDB
-    save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection)
+    save_analysis_to_mongodb(image_array, image_array, 20, 30, collection)
     print("reached")
 
 if __name__ == "__main__":
