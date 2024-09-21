@@ -109,7 +109,7 @@ def generate_tiles(bounds, tile_size):
             tiles.append(((tl_lat, tl_lon), (br_lat, br_lon)))
 
     return tiles
-
+'''
 def run():
     print("hello")
     messages = ['Top-Left corner: ', 'Bottom-Right corner: ', 'Zoom Level: ']
@@ -129,3 +129,4 @@ else:
         json.dump(default_prefs, f, indent=2, ensure_ascii=False)
 
     print(f'Preferences file created in {prefs_path}')
+    '''
