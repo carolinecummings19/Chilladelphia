@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 import Home from './pages/Home.jsx';
 import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 import Terms from './pages/Terms.jsx';

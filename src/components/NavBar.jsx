@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import config from "../../config.json";
-import { Menu, House } from "lucide-react";
 import { withAuthInfo, useRedirectFunctions, useLogoutFunction } from '@propelauth/react'
 import logo from "../assets/chilla_logo.png";
 
@@ -38,18 +37,20 @@ return (
             </div>
         </div>
             {/* Right side - Buttons */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 mr-8">
             {props.isLoggedIn ? (
                 <>
                     <button
                         onClick={() => redirectToAccountPage()}
-                        className="px-4 py-2 bg-[--highlight] text-black rounded-md"
+                        className="px-6 py-3 w-1/2 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-4/5 font-bold text-white font-Lato"
+                        type="button"
                     >
                         Account
                     </button>
                     <button
                         onClick={() => logoutFunction(true)}
-                        className="px-4 py-2 bg-[--highlight] text-black rounded-md"
+                        className="px-6 py-3 w-1/2 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-4/5 font-bold text-white font-Lato"
+                        type="button"
                     >
                         Logout
                     </button>
@@ -58,13 +59,15 @@ return (
                 <>
                     <button
                         onClick={() => redirectToLoginPage()}
-                        className="px-4 py-2 bg-[--highlight] text-black rounded-md"
+                        className="px-6 py-3 w-1/2 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-4/5 font-bold text-white font-Lato"
+                        type="button"
                     >
                         Login
                     </button>
                     <button
                         onClick={() => redirectToSignupPage()}
-                        className="px-4 py-2 bg-[--highlight] text-black rounded-md"
+                        className="px-6 py-3 w-1/2 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-4/5 font-bold text-white font-Lato"
+                        type="button"
                     >
                         Signup
                     </button>
