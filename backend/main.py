@@ -1,7 +1,6 @@
 # main.py
-from connect import connect_to_mongodb, save_analysis_to_mongodb, retrieve_tile_from_mongodb
-
-# from imageanalysis import analyze_image
+from connect import connect_to_mongodb, save_analysis_to_mongodb
+from imageanalysis import analyze_image
 
 # Assume this is the function that retrieves the image as a NumPy array (in another file)
 from tiles_downloading import generate_tiles, image_helper, image_loop 
@@ -29,11 +28,11 @@ def main():
 
     print("Image found!")
     # Step 2: Perform analysis (detectree)
-    # analyzed_image, greenspace_percentage = analyze_image(image_array)
+    analyzed_image, greenspace_percentage = analyze_image(image_array)
 
 
     # Step 3: Store results in MongoDB
-    save_analysis_to_mongodb(image_array, image_array, 20, 30, collection)
+    save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection)
     print("reached")
 
 if __name__ == "__main__":
