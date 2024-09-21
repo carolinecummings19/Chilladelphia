@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet');
 
 @tailwind base;
 @tailwind components;
@@ -11,7 +12,7 @@
 }
 
 :root {
-	font-family: Lato;
+	font-family: Lato, Libre-Baskerville, sans-serif;
 
 	--black: #000000ff;
 	--cambridge-blue: rgb(131, 147, 151);
