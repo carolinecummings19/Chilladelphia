@@ -13,3 +13,4 @@ def analyze_image(original_image_np):
     greenspace_percentage = (greenspace_pixels / total_pixels) * 100
 
     return y_pred, greenspace_percentage
+
