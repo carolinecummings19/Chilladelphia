@@ -1,0 +1,8 @@
+{
+    "database": {
+      "host": "localhost",
+      "port": "3306",
+      "database": "mongodb"
+    },
+    "serverPort": "8080"
+  }
