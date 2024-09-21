@@ -1,8 +1,11 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Commands I have run:
+Make sure you are in `chilladelphia` directory (`cd chilladelphia`)
+`npm install`
+`npm i axios`
+`npm i -D tailwindcss postcss autoprefixer`
+`npm i react-router-dom`
+`npm i lucide-react`
+`npm i @radix-ui/themes`
+`npm i @propelauth/react`
