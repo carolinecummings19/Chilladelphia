@@ -1,5 +1,8 @@
+// Load environment variables from a .env file
+require('dotenv').config({ path: '../.env' });
+
 // the mongodb server URL
-const dbURL = import.meta.env.MONGODB_URI;
+const dbURL = process.env.MONGODB_URI;
 console.log(dbURL);
 
 // import the mongodb driver
