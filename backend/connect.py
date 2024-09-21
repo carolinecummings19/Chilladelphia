@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from PIL import Image
 import io
 import base64
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 import numpy as np
 from io import BytesIO
 
@@ -31,7 +31,7 @@ def connect_to_mongodb(uri, db_name, collection_name):
 #     collection.insert_one(document)
 #     print(f"Images and analysis for {tile_id} stored successfully.")
 
-def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection):
+def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, collection):
     """
     Store the original image, analyzed image, and greenspace percentage in MongoDB.
     
@@ -58,8 +58,7 @@ def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage,
     document = {
         "original_image": encoded_original,
         "analyzed_image": encoded_analyzed,
-        "greenspace_percentage": greenspace_percentage,
-        "tile_id": tile_id
+        "greenspace_percentage": greenspace_percentage
     }
     collection.insert_one(document)
     print("Analysis stored in MongoDB.")
@@ -80,6 +79,7 @@ def retrieve_tile_from_mongodb(tile_id, collection):
     else:
         print(f"No tile found with tile_id: {tile_id}")
         return None
+
 
 
 #not sure if this is needed? but we have a function for saving to disk
