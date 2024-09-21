@@ -11,6 +11,8 @@ export default function Map() {
     const rootURL = config.serverRootURL;
 
     const [address, setAddress] = useState("");
+    const [imageURL, setImageURL] = useState("https://neverastray.com/generated/assets/img/product/city-maps/30x20-philadelphia-(40.0049,-75.1180,11.02)-2022-07-12-1000-a799907a2.webp");
+
 
     const handleAddressChange = (e) => {
         setAddress(e.target.value);
@@ -54,8 +56,11 @@ export default function Map() {
                 <div className="max-w-3xl mx-auto px-4 py-4">
                     <h2 className="text-2xl font-bold mb-4">Map</h2>
                     <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-                        {/* Placeholder for Map API */}
-                        <p>Map will be displayed here</p>
+                        {imageURL ? (
+                            <img src={imageURL} alt="Map Placeholder" className="w-full h-full object-cover" />
+                        ) : (
+                            <p>Map will be displayed here</p>
+                        )}
                     </div>
                 </div>
             </div>
