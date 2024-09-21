@@ -1,5 +1,8 @@
 from pymongo import MongoClient
 import requests
+from PIL import Image
+from io import BytesIO
+import requests
 import json
 import base64
 import os
