@@ -10,13 +10,13 @@ from tiles_downloading import generate_tiles, image_helper, image_loop
 uri = "mongodb+srv://jfrem:jacc@cluster0.nelg2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 db_name = "Chilladelphia"
 collection_name = "Images"
-collection = connect_to_mongodb(uri, db_name, collection_name)
+
 
 
 def main():
     # Assuming you already set up the MongoDB collection and connection in store_images.py
     #lol need to actually implement this
-    collection = connect_to_mongodb()
+    collection = connect_to_mongodb(uri, db_name, collection_name)
 
     ## MAIN LOOP LOGIC WILL GO HERE !! 
     # Step 1: Get image as a NumPy array (from separate file)
@@ -27,7 +27,7 @@ def main():
     tl, br = tile
     image_array, tile_id = image_helper(tl,br,19)
 
-
+    print("Image found!")
     # Step 2: Perform analysis (detectree)
     # analyzed_image, greenspace_percentage = analyze_image(image_array)
 
