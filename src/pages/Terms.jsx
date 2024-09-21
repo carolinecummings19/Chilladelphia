@@ -11,7 +11,7 @@ export default function Terms() {
 
   return (
     <div className="w-screen h-screen bg-[--light-taupe-grey] overflow-scroll flex items-center justify-center ">
-      <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-auto">
+      <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-auto font-Lato">
         <div className="max-w-3xl mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold mb-6">Terms of Service</h1>
           <p className="mb-4">

@@ -10,8 +10,8 @@ export default function PrivacyPolicy() {
   const rootURL = config.serverRootURL;
 
   return (
-    <div className="w-screen h-screen bg-[--light-taupe-grey] overflow-scroll flex items-center justify-center ">
-      <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-auto">
+    <div className="w-screen h-screen bg-[--light-taupe-grey] overflow-scroll flex items-center justify-center mt-24">
+      <div className="rounded-md bg-[--champagne] p-20  w-auto relative font-Lato">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
           <p className="mb-4">

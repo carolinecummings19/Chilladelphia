@@ -30,8 +30,8 @@ export default function Home() {
   return (
     <div className="w-screen h-screen bg-[--light-taupe-grey]">
       <NavBar />
-      <div className="w-screen h-screen flex flex-col items-center justify-center text-xl font-Lato space-y-4">
-        <h1>Welcome to Chilladelphia!</h1>
+      <div className="w-screen h-screen flex flex-col items-center mt-10 text-lg font-Lato space-y-4">
+        <h1 className="font-bold font-[Libre-Baskerville]">Welcome to Chilladelphia!</h1>
         <p>Here you can find the hottest spots in Philly and how to make the city cooler.</p>
         <p>Check out our map to find urban heat spots!</p>
         <button onClick={() => navigate("/map")} className="px-6 py-3 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-1/5 font-bold text-white font-Lato">

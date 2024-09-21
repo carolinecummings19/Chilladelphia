@@ -11,7 +11,7 @@ export default function Contact() {
 
   return (
     <div>
-      <div className="w-screen h-screen bg-[--light-taupe-grey] overflow-scroll flex flex-col items-center justify-center">
+      <div className="w-screen h-screen bg-[--light-taupe-grey] overflow-scroll flex flex-col items-center justify-center font-Lato">
         <div>
           <form className="rounded-md bg-[--champagne] p-16 space-y-4 w-full">
             <h1 className="font-bold flex w-full justify-center text-4xl mb-10 text-[--black] font-Lato">
