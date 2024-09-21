@@ -1,7 +1,7 @@
 /** @format */
 
 const helper = require('../routes/route_helper.js')
-const dbsingleton = require('../db_access.js');
+const { closeMongoDBConnection, getDB, connect, } = require('../db_access.js');
 const config = require('../config.json'); // Load configuration
 const fs = require('fs');
 
