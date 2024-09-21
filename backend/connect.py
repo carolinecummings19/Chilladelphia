@@ -14,6 +14,8 @@ def connect_to_mongodb(uri, db_name, collection_name):
     return collection
 
 
+
+
 # not using this anymore but kept just in case
 # # Function to store image in MongoDB
 # def store_images_in_mongodb(original_image, analyzed_image, greenspace_percentage, tile_id, collection):
@@ -31,7 +33,7 @@ def connect_to_mongodb(uri, db_name, collection_name):
 #     collection.insert_one(document)
 #     print(f"Images and analysis for {tile_id} stored successfully.")
 
-def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, collection):
+def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection):
     """
     Store the original image, analyzed image, and greenspace percentage in MongoDB.
     
@@ -58,7 +60,8 @@ def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage,
     document = {
         "original_image": encoded_original,
         "analyzed_image": encoded_analyzed,
-        "greenspace_percentage": greenspace_percentage
+        "greenspace_percentage": greenspace_percentage,
+        "tile_id": tile_id
     }
     collection.insert_one(document)
     print("Analysis stored in MongoDB.")
@@ -79,6 +82,7 @@ def retrieve_tile_from_mongodb(tile_id, collection):
     else:
         print(f"No tile found with tile_id: {tile_id}")
         return None
+
 
 
 

@@ -2,7 +2,7 @@
   "url": "https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
   "tile_size": 256,
   "channels": 3,
-  "dir": "c:\\Users\\cbosi\\Hackathon\\PennApps\\TeamJACC\\backend\\images",
+  "dir": "C:\\Users\\anjan\\OneDrive\\Desktop\\PennAppsXXV-Chilladelphia\\TeamJACC\\backend\\images",
   "headers": {
     "cache-control": "max-age=0",
     "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"99\", \"Google Chrome\";v=\"99\"",
