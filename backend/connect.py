@@ -5,6 +5,7 @@ import base64
 from dotenv import load_dotenv
 import numpy as np
 from io import BytesIO
+import re
 
 # Function to connect to MongoDB/initialize collection
 def connect_to_mongodb(uri, db_name, collection_name):
@@ -33,7 +34,7 @@ def connect_to_mongodb(uri, db_name, collection_name):
 #     collection.insert_one(document)
 #     print(f"Images and analysis for {tile_id} stored successfully.")
 
-def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection):
+def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection, tl_lat, tl_long, br_lat, br_long):
     """
     Store the original image, analyzed image, and greenspace percentage in MongoDB.
     
@@ -61,7 +62,11 @@ def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage,
         "original_image": encoded_original,
         "analyzed_image": encoded_analyzed,
         "greenspace_percentage": greenspace_percentage,
-        "tile_id": tile_id
+        "tile_id": tile_id, 
+        "tl_lat": tl_lat,
+        "tl_long": tl_long,
+        "br_lat": br_lat,
+        "br_long": br_long
     }
     collection.insert_one(document)
     print("Analysis stored in MongoDB.")
