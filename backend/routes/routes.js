@@ -42,11 +42,51 @@ const getImage = async (req, res) => {
         res.status(500).json({ error: 'Error fetching image' });
     }
 };
+
+const addPost = async (req, res) => {
+    const db = await getDB();
+    const { title, content, author } = req.body;
+
+    if (!title || !content || !author) {
+        return res.status(400).json({ error: 'Title, content, and author are required' });
+    }
+
+    try {
+        const newPost = {
+            title,
+            content,
+            author,
+            createdAt: new Date()
+        };
+
+        const result = await db.collection('DiscussionPosts').insertOne(newPost);
+
+        res.status(201).json(result.ops[0]);
+    } catch (error) {
+        console.error('Error adding post:', error);
+        res.status(500).json({ error: 'Error adding post' });
+    }
+};
+
+const getPosts = async (req, res) => {
+    const db = await getDB();
+
+    try {
+        const posts = await db.collection('DiscussionPosts').find().toArray();
+
+        res.json(posts);
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        res.status(500).json({ error: 'Error fetching posts' });
+    }
+};
   
 
 // Put routes here
 var routes = {
 	get_image: getImage,
+    add_post: addPost,
+    get_posts: getPosts,
 };
 
 module.exports = routes;
