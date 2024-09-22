@@ -54,15 +54,12 @@ export default function Home() {
     <NavBar />
     <div className="w-screen h-full bg-[--light-taupe-grey] overflow flex justify-center">
     <div className="w-screen h-full flex flex-col items-center my-10 text-lg font-Lato space-y-2">
-      <h1 className="font-bold font-[Libre-Baskerville]">Chilladelphia</h1>
-      <p>Here you can find the "coolest" spots in Philly with lots of tree coverage and how to make the city cooler.</p>
-      <p>Check out our map to find urban heat spots!</p>
-      <button onClick={() => navigate("/map")} className="px-6 py-3 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-1/5 font-bold text-white font-Lato">
-      Explore the Map
+      <button onClick={() => navigate("/map")} className="px-6 py-3 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-2/5 font-bold text-3xl text-white font-Lato">
+      Explore the Map!
       </button>
-      <h2 className="font-bold font-Lato text-2xl pt-5">Featured Location: {randomLocation.attraction}</h2>
+      <h2 className="font-bold font-Lato text-2xl pt-6">Featured Location: {randomLocation.attraction}</h2>
       <div className="max-w-3xl mx-auto px-4">
-        <div className="flex flex-row space-x-4 mt-4"> 
+        <div className="flex flex-row space-x-4"> 
           {originalImage && (
           <div className="mt-4">
             <h3 className="text-lg font-semibold mb-2">Original Image</h3>
