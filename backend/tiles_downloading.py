@@ -73,7 +73,7 @@ def image_helper(tl, br, zoom):
     name = f'img_tl_{lat1:.6f}_{lon1:.6f}_br_{lat2:.6f}_{lon2:.6f}.png'
     print(f'Saved as {name}')
     #return image and name
-    return (img, name)
+    return (img, name, lat1, lon1, lat2, lon2)
     #cv2.imwrite(os.path.join(prefs['dir'], name), img)
     
 def image_loop(coordinates_list, zoom):
