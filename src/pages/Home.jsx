@@ -6,6 +6,7 @@ import config from "../../config.json";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar.jsx";
 import BottomBar from "../components/BottomBar.jsx";
+import ChillMeter from "../components/ChillMeter.jsx";
       
 export default function Home() {
   const rootURL = config.serverRootURL;
@@ -13,7 +14,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   const phillyLocations = [
-    { attraction: "Huntsman", coordinates: { lat: 39.95335, long: -75.19819 } },
+    { attraction: "Huntsman Hall", coordinates: { lat: 39.95335, long: -75.19819 } },
   ];
   
   const randomLocation = phillyLocations[0];
@@ -52,9 +53,9 @@ export default function Home() {
   return (
   <div className="flex flex-col">
     <NavBar />
-    <div className="w-screen h-full bg-[--light-taupe-grey] overflow flex justify-center">
-    <div className="w-screen h-full flex flex-col items-center my-10 text-lg font-Lato space-y-2">
-      <button onClick={() => navigate("/map")} className="px-6 py-3 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-2/5 font-bold text-3xl text-white font-Lato">
+    <div className="w-screen h-full bg-[--light-taupe-grey] overflow flex justify-center items-center">
+    <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-auto h-full font-Lato my-4 flex flex-col items-center">
+      <button onClick={() => navigate("/map")} className="px-6 py-3 rounded-md bg-[--cambridge-blue] hover:bg-[--khaki] outline-none w-3/5 font-bold text-3xl text-white font-Lato">
       Explore the Map!
       </button>
       <h2 className="font-bold font-Lato text-2xl pt-6">Featured Location: {randomLocation.attraction}</h2>
@@ -80,6 +81,15 @@ export default function Home() {
             />
           </div>
           )}
+        </div>
+        <div className="mt-4">
+            <p className="text-xl font-semibold my-2">
+              Greenspace Percentage:
+            </p>
+            <ChillMeter greenspacePercentage={5.92} />
+            <p className="text-xl font-semibold my-2">
+                Chill score:  " Not chill ❌"
+            </p>
         </div>
       </div>
     </div>

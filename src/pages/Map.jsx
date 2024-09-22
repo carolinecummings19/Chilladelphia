@@ -197,7 +197,7 @@ export default function Map() {
                                 onClick={() => navigate('/involvement')}
                                 className="mt-2 p-2 bg-[--cambridge-blue] hover:bg-[--khaki] text-white rounded-md"
                             >
-                                How can you reduce heat?
+                                How can you reduce urban heat?
                             </button>
                         </div>
                         <h2 className="text-2xl font-bold mt-4">Map</h2>
