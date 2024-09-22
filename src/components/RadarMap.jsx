@@ -11,6 +11,8 @@ const RadarMap = ({ coordinates }) => {
         const map = Radar.ui.map({
             container: 'map',
             center: coordinates ? [coordinates.lng, coordinates.lat] : undefined,
+            zoom: 14, // Set the zoom level closer to the area
+            style: 'radar-dark-v1',
         });
 
         map.on('load', () => {
@@ -18,12 +20,13 @@ const RadarMap = ({ coordinates }) => {
 
             // add marker to map at map center
             Radar.ui.marker({
-                url: 'https://radar.com/static/image/logo.png',
-                width: '48px',
-                height: '48px',
-                popup: {
-                    text: 'Radar HQ',
-                },
+            url: 'https://icon2.cleanpng.com/20240125/utw/transparent-map-pin-red-dot-with-white-magnifying-glass-1710906071957.webp',
+            width: '48px',
+            color: '#FF0000',
+            height: '48px',
+            popup: {
+                text: 'Radar HQ',
+            },
             })
             .setLngLat([lng, lat])
             .addTo(map);
