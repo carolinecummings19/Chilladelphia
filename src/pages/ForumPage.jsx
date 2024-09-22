@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from "../components/NavBar.jsx";
 import BottomBar from "../components/BottomBar.jsx";
+import axios from 'axios';
+import config from '../../config.json';
 
 const ForumPage = () => {
   const [state, setState] = useState({
@@ -15,6 +17,22 @@ const ForumPage = () => {
     newPostUsername: '',
     newCommentContent: {},
   });
+
+  const rootURL = config.serverRootURL;
+
+  useEffect(() => {
+    // Fetch posts from the backend
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(`/${rootURL}/posts`);
+        setState((prevState) => ({ ...prevState, posts: response.data }));
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const handleNewPostUsernameChange = (e) => {
     setState({ ...state, newPostUsername: e.target.value });
@@ -82,7 +100,7 @@ const ForumPage = () => {
         <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-3/5 h-full font-Lato my-4">
           <div className="max-w-3xl mx-auto px-4 py-4">
             <h1 className="text-3xl font-bold mb-6">Discussion Board</h1>
-            <p className="mb-4">Join the conversation and share your thoughts with the community</p>
+            <p className="mb-4">Join the conversation and share your thoughts with the community. </p>
           </div>
           <div className="max-w-3xl mx-auto px-4 py-4">
             <h2 className="text-2xl font-bold mb-4">New Post</h2>
