@@ -60,7 +60,7 @@ return (
                         Get Involved
                     </div>
                     <div onClick={forum} className="px-4 cursor-pointer">
-                        Connect with Others
+                        Discuss
                     </div>
                     <div onClick={about} className="px-4 cursor-pointer">
                         About Us
