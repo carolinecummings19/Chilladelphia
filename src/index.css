@@ -83,3 +83,12 @@ button:focus-visible {
 		background-color: #f9f9f9;
 	}
 }
+
+@font-face {
+	font-family: "snowfont";
+	src: url("./assets/101ArcticBlast-6j5v.ttf") format("truetype");
+  }
+  .custom-font {
+	font-family: "snowfont", sans-serif;
+  }
+
