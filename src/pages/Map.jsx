@@ -6,6 +6,8 @@ import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
 import BottomBar from "../components/BottomBar.jsx";
 import RadarMap from "../components/RadarMap.jsx";
+import ChillMeter from "../components/ChillMeter.jsx";
+
 import axios from 'axios';
 
 import Radar from 'radar-sdk-js';
@@ -23,7 +25,7 @@ export default function Map() {
     const [address, setAddress] = useState("");
     const [location, setLocation] = useState("");
     const [suggestions, setSuggestions] = useState([]);
-    const [imageURL, setImageURL] = useState("https://neverastray.com/generated/assets/img/product/city-maps/30x20-philadelphia-(40.0049,-75.1180,11.02)-2022-07-12-1000-a799907a2.webp");
+    const [imageURL, setImageURL] = useState("");
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
     const handleAddressChange = (e) => {
@@ -105,7 +107,7 @@ export default function Map() {
             <div className="w-screen h-full bg-[--light-taupe-grey] overflow flex justify-center">
                 <div className="rounded-md bg-[--champagne] p-20 space-y-2 w-auto h-full font-Lato my-4">
                     <div className="max-w-3xl mx-auto px-4 py-4">
-                        <h1 className="text-3xl font-bold mb-6">Urban Heat Issues</h1>
+                        <h1 className="text-3xl font-bold mb-6">Urban Heat</h1>
                         <p className="mb-4">
                             Urban heat islands occur when cities replace natural land cover with dense concentrations of pavement, buildings, and other surfaces that absorb and retain heat. This effect increases energy costs (e.g., for air conditioning), air pollution levels, and heat-related illness and mortality. Understanding and mitigating urban heat is crucial for improving the quality of life in urban areas.
                         </p>
@@ -118,7 +120,7 @@ export default function Map() {
                                 type="text"
                                 value={address}
                                 onChange={handleAddressChange}
-                                placeholder="Enter your address"
+                                placeholder="Enter an address"
                                 className="w-full p-2 border border-gray-300 rounded-md"
                             />
                             {suggestions.length > 0 && (
@@ -143,49 +145,63 @@ export default function Map() {
                         </div>
                     </div>
                     <div className="max-w-3xl mx-auto px-4 py-4">
-    <h2 className="text-2xl font-bold mb-4">Map</h2>
-    <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
-        {coordinates.lat && coordinates.lng ? (
-            <RadarMap coordinates={coordinates} />
-        ) : (
-            <RadarMap />
-        )}
-    </div>
-    {imageURL && (
-        <div className="mt-4">
-            <h3 className="text-xl font-semibold mb-2">Original Image</h3>
-            <img src={imageURL} alt="Original Map" className="w-full h-auto rounded-md" />
-        </div>
-    )}
-    {analyzedImage && (
-        <div className="mt-4">
-            <h3 className="text-xl font-semibold mb-2">Analyzed Image</h3>
-            <img 
-                src={`data:image/png;base64,${analyzedImage}`} 
-                alt="Analyzed Map" 
-                className="w-full h-auto rounded-md" 
-            />
-        </div>
-    )}
-    {originalImage && (
-        <div className="mt-4">
-            <h3 className="text-xl font-semibold mb-2">Original Image</h3>
-            <img 
-                src={`data:image/png;base64,${originalImage}`} 
-                alt="Analyzed Map" 
-                className="w-full h-auto rounded-md" 
-            />
-        </div>
-    )}
-    {greenspacePercentage !== null && (
-        <div className="mt-4">
-            <p className="text-lg font-semibold">
-                Greenspace Percentage: {greenspacePercentage.toFixed(2)}%
-            </p>
-        </div>
-    )}
-</div>
-                    
+                        <h2 className="text-2xl font-bold mb-4">Map</h2>
+                        <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
+                            {coordinates.lat && coordinates.lng ? (
+                                <RadarMap coordinates={coordinates} />
+                            ) : (
+                                <RadarMap coordinates={{ lat: 39.9528, lng: -75.1635 }} />
+                            )}
+                        </div>
+                        {imageURL && (
+                            <div className="mt-4">
+                                <h3 className="text-xl font-semibold mb-2">Original Image</h3>
+                                <img src={imageURL} alt="Original Map" className="w-full h-auto rounded-md" />
+                            </div>
+                        )}
+                        <div className="flex flex-row space-x-4 mt-4"> 
+                            {originalImage && (
+                                <div className="mt-4">
+                                    <h3 className="text-xl font-semibold mb-2">Original Image</h3>
+                                    <img 
+                                        src={`data:image/png;base64,${originalImage}`} 
+                                        alt="Analyzed Map" 
+                                        className="w-full h-auto rounded-md" 
+                                    />
+                                </div>
+                            )}
+                            {analyzedImage && (
+                                <div className="mt-4">
+                                    <h3 className="text-xl font-semibold mb-2">Analyzed Image</h3>
+                                    <img 
+                                        src={`data:image/png;base64,${analyzedImage}`} 
+                                        alt="Analyzed Map" 
+                                        className="w-full h-auto rounded-md" 
+                                    />
+                                </div>
+                            )}
+                        </div>
+                        {greenspacePercentage !== null && (
+                            <div className="mt-4">
+                                <p className="text-xl font-semibold mb-2">
+                                    Greenspace Percentage:
+                                </p>
+                                <ChillMeter greenspacePercentage={greenspacePercentage} />
+                            </div>
+                        )}
+                        <div className="max-w-3xl mx-auto px-4 py-4">
+                            <h2 className="text-2xl font-bold mb-4">Tree Coverage</h2>
+                            <p className="mb-4">
+                                It is recommended to have at least 30% tree coverage in every neighborhood to help mitigate the effects of urban heat islands. Trees provide shade, reduce temperatures, and improve air quality.
+                            </p>
+                            <button
+                                onClick={() => navigate('/involvement')}
+                                className="mt-2 p-2 bg-[--cambridge-blue] hover:bg-[--khaki] text-white rounded-md"
+                            >
+                                How can you reduce heat?
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <BottomBar />
