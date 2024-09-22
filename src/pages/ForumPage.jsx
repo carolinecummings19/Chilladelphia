@@ -20,20 +20,6 @@ const ForumPage = () => {
 
   const rootURL = config.serverRootURL;
 
-  useEffect(() => {
-    // Fetch posts from the backend
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(`/${rootURL}/posts`);
-        setState((prevState) => ({ ...prevState, posts: response.data }));
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
   const handleNewPostUsernameChange = (e) => {
     setState({ ...state, newPostUsername: e.target.value });
   };
