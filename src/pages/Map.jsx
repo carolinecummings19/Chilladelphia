@@ -6,6 +6,7 @@ import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
 import BottomBar from "../components/BottomBar.jsx";
 import RadarMap from "../components/RadarMap.jsx";
+import axios from 'axios';
 
 import Radar from 'radar-sdk-js';
 import 'radar-sdk-js/dist/radar.css';
@@ -26,6 +27,7 @@ export default function Map() {
     const handleAddressChange = (e) => {
         setAddress(e.target.value);
         // Use Radar's autocomplete API to get address suggestions
+
         Radar.autocomplete({
             query: e.target.value,
             near: {
@@ -37,6 +39,20 @@ export default function Map() {
         .then((result) => {
             const { addresses } = result;
             setSuggestions(addresses);
+
+            if (addresses.length > 0) {
+                const selectedAddress = addresses[0];
+                axios.post(`${rootURL}/getImage`, {
+                    latitude: selectedAddress.latitude,
+                    longitude: selectedAddress.longitude
+                })
+                .then((response) => {
+                    setImageURL(response.data.imageUrl);
+                })
+                .catch((error) => {
+                    console.error("Error fetching image URL:", error);
+                });
+            }
         })
         .catch((err) => {
             console.error("Autocomplete error:", err);
@@ -50,29 +66,23 @@ export default function Map() {
     };
 
     const handleAddressSubmit = () => {
-        // // Use Radar's geocoding API to get the coordinates of the inputted address
-        // Radar.forwardGeocode({ query: address }, (err, result) => {
-        //     if (err) {
-        //         console.error("Geocoding error:", err);
-        //         return;
-        //     }
-        //     if (result && result.addresses && result.addresses.length > 0) {
-        //         console.log("here");
-        //         const { latitude, longitude } = result.addresses[0].location;
-        //         setCoordinates({ lat: latitude, long: longitude });
-        //         console.log("Coordinates:", latitude, longitude);
-        //         // Optionally, update the imageURL based on the fetched coordinates
-        //         // setImageURL(fetchedImageURL);
-        //     } else {
-        //         console.log("No addresses found for the inputted address.");
-        //     }
-        // });
         console.log("Location:", location);
         if (address && location) {
-            setCoordinates({ lat: location.latitude, long: location.longitude });
-            console.log("Coordinates:", location.latitude, location.longitude);
-            // Optionally, update the imageURL based on the fetched coordinates
-            // setImageURL(fetchedImageURL);
+            setCoordinates({ lat: location.latitude, lng: location.longitude });
+
+            console.log("Location coordinates:", location.latitude, location.longitude);
+
+            axios.get(`${rootURL}/getImage`, {
+                lat: location.latitude,
+                long: location.longitude
+            })
+            .then((response) => {
+                console.log("Image URL response:", response.data);
+                setImageURL(response.data.imageUrl);
+            })
+            .catch((error) => {
+                console.error("Error fetching image URL:", error);
+            });
         } else {
             console.log("No addresses found for the inputted address.");
         }
@@ -130,6 +140,11 @@ export default function Map() {
                                 <RadarMap />
                             )}
                         </div>
+                        {imageURL && (
+                            <div className="mt-4">
+                                <img src={imageURL} alt="Map" className="w-full h-auto rounded-md" />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
