@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import NavBar from "../components/NavBar.jsx";
 import BottomBar from "../components/BottomBar.jsx";
+import RadarMap from "../components/RadarMap.jsx";
 
 import Radar from 'radar-sdk-js';
 import 'radar-sdk-js/dist/radar.css';
@@ -122,11 +123,11 @@ export default function Map() {
                     </div>
                     <div className="max-w-3xl mx-auto px-4 py-4">
                         <h2 className="text-2xl font-bold mb-4">Map</h2>
-                        <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
-                            {imageURL ? (
-                                <img src={imageURL} alt="Map Placeholder" className="w-full h-full object-cover" />
+                        <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
+                            {coordinates.lat && coordinates.lng ? (
+                                <RadarMap coordinates={coordinates} />
                             ) : (
-                                <p>Map will be displayed here</p>
+                                <RadarMap />
                             )}
                         </div>
                     </div>
