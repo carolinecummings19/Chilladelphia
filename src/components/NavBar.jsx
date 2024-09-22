@@ -48,7 +48,7 @@ return (
             <div className="flex items-center">
                 <div onClick={home} className="px-4 cursor-pointer flex items-center">
                     <img src={logo} alt="Chilladelphia Logo" className="h-20 w-20" />
-                    <div className="font-bold text-[20pt] mx-1 h-full font-[snowfont]">
+                    <div className="font-bold text-[24pt] mx-1 h-full text-[--cambridge-blue] font-[snowfont]">
                         Chilladelphia
                     </div>
                 </div>
@@ -60,7 +60,7 @@ return (
                         Get Involved
                     </div>
                     <div onClick={forum} className="px-4 cursor-pointer">
-                        Connect with Others
+                        Discuss
                     </div>
                     <div onClick={about} className="px-4 cursor-pointer">
                         About Us
