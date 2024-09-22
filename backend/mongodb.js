@@ -1,56 +1,32 @@
-// Load environment variables from a .env file
-require('dotenv').config({ path: '../.env' });
-
-// the mongodb server URL
-const dbURL = process.env.MONGODB_URI;
-
-// import the mongodb driver
 const { MongoClient } = require('mongodb');
+const config = require('./config.json');
 
-// MongoDB database connection
-let MongoConnection;
+let db;
 
-/**
- * SRP: connects to MongoDB and return the connection handle
- */
-
-// connection to the db
 const connect = async () => {
-  // always use try/catch to handle any exception
-  try {
-    MongoConnection = (await MongoClient.connect(
-      dbURL,
-    )); // we return the entire connection, not just the DB
-    // check that we are connected to the db
-    console.log(`connected to db: ${MongoConnection.db().databaseName}`);
-    return MongoConnection;
-  } catch (err) {
-    console.log(err.message);
-  }
+  console.log("Database name: ", config.dbName);
+    if (!db) {
+        const client = new MongoClient(config.mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+        await client.connect();
+        db = client.db(config.dbName);
+        console.log("Connected to database1");
+    }
+    return db;
 };
-/**
- *
- * @returns the database attached to this MongoDB connection
- */
+
 const getDB = async () => {
-  // test if there is an active connection
-  if (!MongoConnection) {
-    await connect();
-  }
-  return MongoConnection;
+    if (!db) {
+        await connect();
+        console.log("Connected to database2");
+    }
+    return db;
 };
 
-/**
- *
- * Close the mongodb connection
- */
 const closeMongoDBConnection = async () => {
-  await MongoConnection.close();
+    if (db) {
+        await db.close();
+        db = null;
+    }
 };
 
-// export the functions
-module.exports = {
-  closeMongoDBConnection,
-  getDB,
-  connect,
-};
+module.exports = { connect, getDB, closeMongoDBConnection };
