@@ -8,10 +8,10 @@ const ForumPage = () => {
   const [state, setState] = useState({
     posts: [
         { id: 1, username: 'coolcat123', content: 'Does anyone know of any community efforts to plant more trees in West Philly? I have been thinking about volunteering.', comments: [] },
-        { id: 2, username: 'jfrem', content: 'I had no idea certain areas of Philly were this much hotter. Thanks for sharing the tips!', comments: [] },
+        { id: 2, username: 'carolinec123', content: 'Let’s advocate for more funding to maintain and expand our urban forests!', comments: [] },
         { id: 3, username: 'cambk', content: 'Excited to join this community! Looking forward to sharing ideas and learning from everyone.', comments: [] },
         { id: 4, username: 'anjanab', content: 'A few more green spaces can make a big difference in reducing heat islands!', comments: [] },
-        { id: 5, username: 'carolinec123', content: 'Let’s advocate for more funding to maintain and expand our urban forests!', comments: [] },
+        { id: 5, username: 'jfrem', content: 'I had no idea certain areas of Philly were this much hotter. Thanks for sharing the tips!', comments: [] },
     ],
     newPostContent: '',
     newPostUsername: '',
@@ -119,7 +119,7 @@ const ForumPage = () => {
           <div className="max-w-3xl mx-auto px-4 py-4">
             <h2 className="text-2xl font-bold mb-4">Posts</h2>
             <div className="space-y-4">
-              {state.posts.map((post) => (
+              {state.posts.slice().reverse().map((post) => (
                 <div key={post.id} className="bg-gray-100 p-4 rounded-md w-full">
                   <h3 className="text-lg font-bold mb-2">{'@' + post.username}</h3>
                   <p>{post.content}</p>
