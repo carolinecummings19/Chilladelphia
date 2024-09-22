@@ -26,7 +26,7 @@ export default function AboutUs() {
                     <p className="mb-4">
                         Whether you are a resident or a visitor, we aim to provide you with
                         valuable insights and recommendations to help your communities feel their best. 
-                        Join us in our mission to mitigate climate change and impact our communities!
+                        Join us in our mission to mitigate climate change and cool down Philly!
                     </p>
                 </div>
             </div>
