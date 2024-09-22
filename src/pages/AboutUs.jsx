@@ -17,22 +17,16 @@ export default function AboutUs() {
                 <div className="max-w-3xl mx-auto px-4 py-8">
                     <h1 className="text-3xl font-bold mb-6">About Us</h1>
                     <p className="mb-4">
-                        Welcome to Chilladelphia! We are a community-driven platform dedicated to
-                        bringing you the best experiences in Philadelphia. Our mission is to
-                        connect people with the vibrant culture, events, and hidden gems of
-                        this amazing city.
+                        Welcome to Chilladelphia! Philly had record heat this summer, and we're trying to fix that.
                     </p>
                     <p className="mb-4">
-                        At Chilladelphia, we believe in the power of community and the importance
-                        of local engagement. Our team is passionate about showcasing the
-                        diverse and dynamic aspects of Philadelphia, from its rich history to
-                        its modern-day attractions.
+                        We are a group of 4 juniors interested in sustainability studying Computer and 
+                        Information Science at the University of Pennsylvania. 
                     </p>
                     <p className="mb-4">
                         Whether you are a resident or a visitor, we aim to provide you with
-                        valuable insights and recommendations to make the most out of your
-                        time in the city. Join us in exploring Philadelphia and discovering
-                        all that it has to offer!
+                        valuable insights and recommendations to help your communities feel their best. 
+                        Join us in our mission to mitigate climate change and impact our communities!
                     </p>
                 </div>
             </div>
