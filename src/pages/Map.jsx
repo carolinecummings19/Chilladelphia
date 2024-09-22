@@ -17,7 +17,9 @@ Radar.initialize('prj_live_pk_5d7c81dfa66723740042a5be87c66c9374b70123');
 export default function Map() {
     const navigate = useNavigate();
     const rootURL = config.serverRootURL;
-
+    const [greenspacePercentage, setGreenspacePercentage] = useState(null);
+    const [analyzedImage, setAnalyzedImage] = useState(null);
+    const [originalImage, setOriginalImage] = useState(null);
     const [address, setAddress] = useState("");
     const [location, setLocation] = useState("");
     const [suggestions, setSuggestions] = useState([]);
@@ -43,11 +45,15 @@ export default function Map() {
             if (addresses.length > 0) {
                 const selectedAddress = addresses[0];
                 axios.post(`${rootURL}/getImage`, {
-                    latitude: selectedAddress.latitude,
-                    longitude: selectedAddress.longitude
+                    lat: selectedAddress.latitude,
+                    long: selectedAddress.longitude
                 })
                 .then((response) => {
-                    setImageURL(response.data.imageUrl);
+                    console.log("Image analysis response:", response.data);
+                    setOriginalImage(response.data.original_image);
+                    setAnalyzedImage(response.data.analyzed_image);
+                    setGreenspacePercentage(response.data.greenspace_percentage);
+                    setImageURL(response.data.imageURL)
                 })
                 .catch((error) => {
                     console.error("Error fetching image URL:", error);
@@ -69,16 +75,21 @@ export default function Map() {
         console.log("Location:", location);
         if (address && location) {
             setCoordinates({ lat: location.latitude, lng: location.longitude });
-
+    
             console.log("Location coordinates:", location.latitude, location.longitude);
-
+    
             axios.get(`${rootURL}/getImage`, {
-                lat: location.latitude,
-                long: location.longitude
+                params: {
+                    lat: location.latitude,
+                    long: location.longitude
+                }
             })
             .then((response) => {
                 console.log("Image URL response:", response.data);
                 setImageURL(response.data.imageUrl);
+                setGreenspacePercentage(response.data.greenspace_percentage);
+                setAnalyzedImage(response.data.analyzed_image);
+                setOriginalImage(response.data.original_image)
             })
             .catch((error) => {
                 console.error("Error fetching image URL:", error);
@@ -132,20 +143,49 @@ export default function Map() {
                         </div>
                     </div>
                     <div className="max-w-3xl mx-auto px-4 py-4">
-                        <h2 className="text-2xl font-bold mb-4">Map</h2>
-                        <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
-                            {coordinates.lat && coordinates.lng ? (
-                                <RadarMap coordinates={coordinates} />
-                            ) : (
-                                <RadarMap />
-                            )}
-                        </div>
-                        {imageURL && (
-                            <div className="mt-4">
-                                <img src={imageURL} alt="Map" className="w-full h-auto rounded-md" />
-                            </div>
-                        )}
-                    </div>
+    <h2 className="text-2xl font-bold mb-4">Map</h2>
+    <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
+        {coordinates.lat && coordinates.lng ? (
+            <RadarMap coordinates={coordinates} />
+        ) : (
+            <RadarMap />
+        )}
+    </div>
+    {imageURL && (
+        <div className="mt-4">
+            <h3 className="text-xl font-semibold mb-2">Original Image</h3>
+            <img src={imageURL} alt="Original Map" className="w-full h-auto rounded-md" />
+        </div>
+    )}
+    {analyzedImage && (
+        <div className="mt-4">
+            <h3 className="text-xl font-semibold mb-2">Analyzed Image</h3>
+            <img 
+                src={`data:image/png;base64,${analyzedImage}`} 
+                alt="Analyzed Map" 
+                className="w-full h-auto rounded-md" 
+            />
+        </div>
+    )}
+    {originalImage && (
+        <div className="mt-4">
+            <h3 className="text-xl font-semibold mb-2">Original Image</h3>
+            <img 
+                src={`data:image/png;base64,${originalImage}`} 
+                alt="Analyzed Map" 
+                className="w-full h-auto rounded-md" 
+            />
+        </div>
+    )}
+    {greenspacePercentage !== null && (
+        <div className="mt-4">
+            <p className="text-lg font-semibold">
+                Greenspace Percentage: {greenspacePercentage.toFixed(2)}%
+            </p>
+        </div>
+    )}
+</div>
+                    
                 </div>
             </div>
             <BottomBar />
