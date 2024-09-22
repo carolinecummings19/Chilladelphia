@@ -72,7 +72,7 @@ export default function Home() {
           )}
           {analyzedImage && (
           <div className="mt-4">
-            <h3 className="text-lg font-semibold mb-2">Analyzed Image</h3>
+            <h3 className="text-lg font-semibold mb-2">Our Analysis</h3>
             <img 
             src={`data:image/png;base64,${analyzedImage}`} 
             alt="Analyzed Map" 
