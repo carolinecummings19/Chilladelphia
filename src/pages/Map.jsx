@@ -76,7 +76,7 @@ export default function Map() {
     const handleAddressSubmit = () => {
         console.log("Location:", location);
         if (address && location) {
-            setCoordinates({ lat: location.lat, lng: location.long});
+            setCoordinates({ lat: location.latitude, lng: location.longitude });
     
             console.log("Location coordinates:", location.latitude, location.longitude);
     
