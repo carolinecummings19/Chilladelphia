@@ -124,7 +124,7 @@ export default function Map() {
                                 className="w-full p-2 border border-gray-300 rounded-md"
                             />
                             {suggestions.length > 0 && (
-                                <ul className="border border-gray-300 rounded-md mt-2">
+                                <ul className="border border-gray-300 rounded-md mb-4">
                                     {suggestions.slice(0, 10).map((suggestion, index) => (
                                         <li
                                             key={index}
@@ -144,24 +144,16 @@ export default function Map() {
                             </button>
                         </div>
                     </div>
-                    <div className="max-w-3xl mx-auto px-4 py-4">
-                        <h2 className="text-2xl font-bold mb-4">Map</h2>
-                        <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
-                            {coordinates.lat && coordinates.lng ? (
-                                <RadarMap coordinates={coordinates} />
-                            ) : (
-                                <RadarMap coordinates={{ lat: 39.9528, lng: -75.1635 }} />
-                            )}
-                        </div>
+                    <div className="max-w-3xl mx-auto px-4">
                         {imageURL && (
                             <div className="mt-4">
                                 <h3 className="text-xl font-semibold mb-2">Original Image</h3>
                                 <img src={imageURL} alt="Original Map" className="w-full h-auto rounded-md" />
                             </div>
                         )}
-                        <div className="flex flex-row space-x-4 mt-4"> 
+                        <div className="flex flex-row space-x-4 mt-2 "> 
                             {originalImage && (
-                                <div className="mt-4">
+                                <div>
                                     <h3 className="text-xl font-semibold mb-2">Original Image</h3>
                                     <img 
                                         src={`data:image/png;base64,${originalImage}`} 
@@ -171,7 +163,7 @@ export default function Map() {
                                 </div>
                             )}
                             {analyzedImage && (
-                                <div className="mt-4">
+                                <div>
                                     <h3 className="text-xl font-semibold mb-2">Analyzed Image</h3>
                                     <img 
                                         src={`data:image/png;base64,${analyzedImage}`} 
@@ -183,15 +175,22 @@ export default function Map() {
                         </div>
                         {greenspacePercentage !== null && (
                             <div className="mt-4">
-                                <p className="text-xl font-semibold mb-2">
-                                    Greenspace Percentage:
+                                <p className="text-xl font-semibold my-2">
+                                 Greenspace Percentage:
                                 </p>
                                 <ChillMeter greenspacePercentage={greenspacePercentage} />
+                                <p className="text-xl font-semibold my-2">
+                                    Chill score: 
+                                    {greenspacePercentage < 10 && " Not chill ❌"}
+                                    {greenspacePercentage >= 10 && greenspacePercentage < 20 && " Pretty chill I guess 🤙"}
+                                    {greenspacePercentage >= 20 && greenspacePercentage < 30 && " Almost super chill 🧊"}
+                                    {greenspacePercentage >= 30 && " Good chill 🥶"}
+                                </p>
                             </div>
                         )}
-                        <div className="max-w-3xl mx-auto px-4 py-4">
+                        <div className="max-w-3xl mx-auto py-4 mt-2">
                             <h2 className="text-2xl font-bold mb-4">Tree Coverage</h2>
-                            <p className="mb-4">
+                            <p className="mb-2">
                                 It is recommended to have at least 30% tree coverage in every neighborhood to help mitigate the effects of urban heat islands. Trees provide shade, reduce temperatures, and improve air quality.
                             </p>
                             <button
@@ -200,6 +199,14 @@ export default function Map() {
                             >
                                 How can you reduce heat?
                             </button>
+                        </div>
+                        <h2 className="text-2xl font-bold mt-4">Map</h2>
+                        <div className="w-full h-96 bg-gray-200 flex items-center justify-center p-1 border border-gray-400">
+                            {coordinates.lat && coordinates.lng ? (
+                                <RadarMap coordinates={coordinates} />
+                            ) : (
+                                <RadarMap coordinates={{ lat: 39.9528, lng: -75.1635 }} />
+                            )}
                         </div>
                     </div>
                 </div>
