@@ -1,10 +1,10 @@
 {
-    "database": {
-      "host": "localhost",
-      "port": "3306",
-      "database": "chilladelphia"
-    },
-    "serverPort": "8080",
-    "mongoUri": "mongodb+srv://jfrem:jacc@cluster0.nelg2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-    "dbName": "chilladelphia"
-  }
+  "database": {
+    "host": "localhost",
+    "port": "3306",
+    "database": "chilladelphia"
+  },
+  "serverPort": "8080",
+  "mongoUri": "mongodb+srv://jfrem:jacc@cluster0.nelg2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "dbName": "chilladelphia"
+}
