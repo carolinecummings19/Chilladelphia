@@ -5,7 +5,6 @@ import base64
 from dotenv import load_dotenv
 import numpy as np
 from io import BytesIO
-import re
 
 # Function to connect to MongoDB/initialize collection
 def connect_to_mongodb(uri, db_name, collection_name):
@@ -15,26 +14,7 @@ def connect_to_mongodb(uri, db_name, collection_name):
     return collection
 
 
-
-
-# not using this anymore but kept just in case
-# # Function to store image in MongoDB
-# def store_images_in_mongodb(original_image, analyzed_image, greenspace_percentage, tile_id, collection):
-#     # Encode both original and analyzed images to base64
-#     original_encoded = base64.b64encode(original_image).decode('utf-8')
-#     analyzed_encoded = base64.b64encode(analyzed_image).decode('utf-8')
-
-#     # Store all details in MongoDB
-#     document = {
-#         'tile_id': tile_id,
-#         'original_image': original_encoded,
-#         'analyzed_image': analyzed_encoded,
-#         'greenspace_percentage': greenspace_percentage
-#     }
-#     collection.insert_one(document)
-#     print(f"Images and analysis for {tile_id} stored successfully.")
-
-def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection, tl_lat, tl_long, br_lat, br_long):
+def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage, tile_id, collection):
     """
     Store the original image, analyzed image, and greenspace percentage in MongoDB.
     
@@ -62,17 +42,12 @@ def save_analysis_to_mongodb(image_array, analyzed_image, greenspace_percentage,
         "original_image": encoded_original,
         "analyzed_image": encoded_analyzed,
         "greenspace_percentage": greenspace_percentage,
-        "tile_id": tile_id, 
-        "tl_lat": tl_lat,
-        "tl_long": tl_long,
-        "br_lat": br_lat,
-        "br_long": br_long
+        "tile_id": tile_id
     }
     collection.insert_one(document)
     print("Analysis stored in MongoDB.")
 
-
-# Function to retrieve a NumPy array (image) from MongoDB
+    
 def retrieve_tile_from_mongodb(tile_id, collection):
     tile = collection.find_one({'tile_id': tile_id})
 
@@ -83,21 +58,21 @@ def retrieve_tile_from_mongodb(tile_id, collection):
         # Convert binary image data to a NumPy array
         image = Image.open(io.BytesIO(image_data))
         tile_array = np.array(image)
-        return tile_array
+
+        # Encode the image back to base64 for JSON response
+        buffered = io.BytesIO()
+        image.save(buffered, format="PNG")  # or another format like "JPEG"
+        encoded_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
+        # Construct the JSON response
+        response = {
+            "tile_id": tile_id,
+            "image": encoded_image
+        }
+        return response
     else:
         print(f"No tile found with tile_id: {tile_id}")
         return None
-
-
-
-
-#not sure if this is needed? but we have a function for saving to disk
-
-# def save_image_to_disk(image_array, filename):
-#     # Convert NumPy array back to image and save it
-#     image = Image.fromarray(np.uint8(image_array))
-#     image.save(filename)
-#     print(f"Image saved to {filename}")
 
 
 

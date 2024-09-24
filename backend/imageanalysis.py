@@ -16,23 +16,23 @@ def analyze_image(original_image_np):
     else:
         raise ValueError("Unexpected number of channels")
 
-    # Initialize the DetecTree classifier
+    # create detectree classifier
     classifier = Classifier()
 
-    # Use a context manager for the temporary file
+    # for making temp file
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as temp_file:
         temp_filename = temp_file.name
         cv2.imwrite(temp_filename, cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR))
 
     try:
-        # Predict using the temporary image file
+        # predict w temp file
         y_pred = classifier.predict_img(temp_filename)
-        # Ensure y_pred is a binary mask
+        # make binary
         if y_pred.dtype != bool:
             y_pred_binary = (y_pred > 0.5).astype(bool)
         else:
             y_pred_binary = y_pred
-        # Calculate greenspace percentage
+        # Calculate tree cover percentage
         total_pixels = float(y_pred_binary.size)
         green_pixels = float(np.sum(y_pred_binary))
         greenspace_percentage = (green_pixels / total_pixels) * 100.0
@@ -55,10 +55,4 @@ def analyze_image(original_image_np):
         except Exception as e:
             print(f"Failed to delete temporary file: {str(e)}")
 
-# Example usage
-# image_np = ... # Your numpy array image in BGR or BGRA format
-# analyzed_image, percentage = analyze_image(image_np)
-# if analyzed_image is not None:
-#     print(f"Greenspace percentage: {percentage:.2f}%")
-# else:
-#     print("Image analysis failed")
+
