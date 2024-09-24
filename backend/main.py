@@ -5,9 +5,10 @@ from connect import connect_to_mongodb, save_analysis_to_mongodb
 # Assume this is the function that retrieves the image as a NumPy array (in another file)
 from tiles_downloading import generate_tiles, image_helper, image_loop 
 from imageanalysis import analyze_image
+import os
 
 # MongoDB setup
-uri = "mongodb+srv://jfrem:jacc@cluster0.nelg2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = os.getenv("MONGODB_URI")
 db_name = "chilladelphia"
 collection_name = "Images_UCD"
 
